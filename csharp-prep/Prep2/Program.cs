@@ -8,33 +8,39 @@ class Program
         Console.WriteLine("What is your grade?");
         string grade = Console.ReadLine();
         int grade1 = int.Parse(grade);
+        string letter = "";
 
         if (grade1 >= 90)
         {
+            letter = "A";
 
-            Console.WriteLine("You got an A");
+            Console.WriteLine($"You got an {letter}");
 
         }
 
         else if (grade1 >= 80)
         {
-            Console.WriteLine("You got a B");
+            letter = "B";
+            Console.WriteLine($"You got a {letter}");
 
         }
 
         else if (grade1 >= 70)
         {
-          Console.WriteLine("You got a C");  
+            letter = "C";
+          Console.WriteLine($"You got a {letter}");  
         }
 
         else if (grade1 >= 60)
         {
-            Console.WriteLine("You got a D"); 
+            letter = "D";
+            Console.WriteLine($"You got a {letter}"); 
         }
 
         else
         {
-            Console.WriteLine("You got an F");
+            letter = "F";
+            Console.WriteLine($"You got an {letter}");
         }
 
         if (grade1 >= 70)
