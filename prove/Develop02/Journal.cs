@@ -20,12 +20,13 @@ class Journal
     {
         foreach (Entry entry in entries)
         {
-            Console.WriteLine("Date: " + entry.Date.ToString("yyyy-MM-dd"));
+            Console.WriteLine("The Date: " + entry.Date.ToString("yyyy-MM-dd"));
             Console.WriteLine("Prompt: " + entry.Prompt);
-            Console.WriteLine("Response: " + entry.Response);
+            Console.WriteLine("The Response: " + entry.Response);
             Console.WriteLine();
         }
     }
+
 
     public void SaveJournal(string filename)
     {
