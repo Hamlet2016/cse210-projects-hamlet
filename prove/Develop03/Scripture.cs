@@ -5,37 +5,44 @@ public class Scripture
 {
     private Reference reference;
     private string text;
-    private List<Word> hiddenWords;
+    private List<Word> words;
 
     public Scripture(string referenceString, string text)
     {
         reference = new Reference(referenceString);
         this.text = text;
-        hiddenWords = new List<Word>();
+        words = new List<Word>();
+
+        string[] wordArray = text.Split(' ');
+
+        foreach (string word in wordArray)
+        {
+            words.Add(new Word(word));
+        }
     }
 
     public void HideRandomWord()
     {
-        string[] words = text.Split(' ');
         Random random = new Random();
-        int index = random.Next(0, words.Length);
+        List<Word> visibleWords = words.FindAll(word => !word.IsHidden);
 
-        Word hiddenWord = new Word(words[index]);
-        hiddenWords.Add(hiddenWord);
+        if (visibleWords.Count == 0)
+        {
+            Console.WriteLine("All words are already hidden.");
+            return;
+        }
 
-        words[index] = new string('_', hiddenWord.Value.Length);
+        int index = random.Next(visibleWords.Count);
+        visibleWords[index].Hide();
 
-        text = string.Join(" ", words);
         Display(); // Display the modified scripture with hidden word
     }
 
     public bool AreAllWordsHidden()
     {
-        string[] words = text.Split(' ');
-
-        foreach (string word in words)
+        foreach (Word word in words)
         {
-            if (!hiddenWords.Exists(hiddenWord => hiddenWord.Value == word))
+            if (!word.IsHidden)
             {
                 return false;
             }
@@ -48,6 +55,17 @@ public class Scripture
     {
         Console.Clear(); // Clear the console
         Console.WriteLine(reference.ToString() + ":");
-        Console.WriteLine(text);
+        foreach (Word word in words)
+        {
+            if (word.IsHidden)
+            {
+                Console.Write(new string('_', word.Text.Length) + " ");
+            }
+            else
+            {
+                Console.Write(word.Text + " ");
+            }
+        }
+        Console.WriteLine();
     }
 }
