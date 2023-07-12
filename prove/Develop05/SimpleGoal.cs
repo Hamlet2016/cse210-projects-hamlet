@@ -1,22 +1,11 @@
-public class SimpleGoal : Goal
+class SimpleGoal : Goal
 {
-    public SimpleGoal(string name, int value) : base(name, value)
+    public SimpleGoal() : base("Simple Goal", 1000)
     {
     }
 
-    public override void Complete()
+    public override void RecordEvent()
     {
-        if (!IsCompleted)
-        {
-            Console.WriteLine($"Congratulations! You have completed the goal: {Name}");
-            IsCompleted = true;
-            // Add value to the user's score
-            // TODO: Implement score tracking logic
-        }
-    }
-
-    public override string GetProgress()
-    {
-        return IsCompleted ? "[X]" : "[ ]";
+        IsCompleted = true;
     }
 }

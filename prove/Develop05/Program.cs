@@ -1,34 +1,44 @@
 using System;
-using System.Collections.Generic;
 
 class Program
 {
     static void Main(string[] args)
     {
-        List<Goal> goals = new List<Goal>();
+        EternalQuestManager questManager = new EternalQuestManager();
 
-        // Create different types of goals
-        SimpleGoal marathonGoal = new SimpleGoal("Run a marathon", 1000);
-        EternalGoal scripturesGoal = new EternalGoal("Read scriptures", 100);
-        ChecklistGoal templeGoal = new ChecklistGoal("Attend the temple", 50, 10);
+        Console.WriteLine("Welcome to the Eternal Quest Program!");
 
-        // Add goals to the list
-        goals.Add(marathonGoal);
-        goals.Add(scripturesGoal);
-        goals.Add(templeGoal);
-
-        // Record an event (accomplished goal) for each goal
-        foreach (Goal goal in goals)
+        bool isRunning = true;
+        while (isRunning)
         {
-            goal.Complete();
-        }
+            Console.WriteLine("Please select an option:");
+            Console.WriteLine("1. Show Goals");
+            Console.WriteLine("2. Record Event");
+            Console.WriteLine("3. Show Points");
+            Console.WriteLine("4. Exit");
 
-        // Display the list of goals and their progress
-        foreach (Goal goal in goals)
-        {
-            Console.WriteLine($"{goal.GetProgress()} {goal.Name}");
-        }
+            int option = Convert.ToInt32(Console.ReadLine());
 
-        Console.ReadLine();
+            switch (option)
+            {
+                case 1:
+                    questManager.ShowGoalsAndProgress();
+                    break;
+                case 2:
+                    questManager.RecordEvent();
+                    break;
+                case 3:
+                    questManager.ShowPoints();
+                    break;
+                case 4:
+                    isRunning = false;
+                    break;
+                default:
+                    Console.WriteLine("Invalid option. Please try again.");
+                    break;
+            }
+
+            Console.WriteLine();
+        }
     }
 }

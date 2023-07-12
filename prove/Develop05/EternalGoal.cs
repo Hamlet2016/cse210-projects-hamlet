@@ -1,18 +1,11 @@
-public class EternalGoal : Goal
+class EternalGoal : Goal
 {
-    public EternalGoal(string name, int value) : base(name, value)
+    public EternalGoal() : base("Eternal Goal", 100)
     {
     }
 
-    public override void Complete()
+    public override void RecordEvent()
     {
-        Console.WriteLine($"You recorded progress for the eternal goal: {Name}");
-        // Add value to the user's score
-        // TODO: Implement score tracking logic
-    }
-
-    public override string GetProgress()
-    {
-        return "[ ]";
+        Points += 100;
     }
 }

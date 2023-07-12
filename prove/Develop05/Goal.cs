@@ -1,16 +1,24 @@
-public abstract class Goal
+abstract class Goal
 {
-    public string Name { get; set; }
-    public int Value { get; set; }
-    public bool IsCompleted { get; set; }
+    private static int nextId = 1;
 
-    public Goal(string name, int value)
+    public int Id { get; }
+    public string Description { get; }
+    public int Points { get; protected set; }
+    public bool IsCompleted { get; protected set; }
+
+    public Goal(string description, int points)
     {
-        Name = name;
-        Value = value;
+        Id = nextId++;
+        Description = description;
+        Points = points;
         IsCompleted = false;
     }
 
-    public abstract void Complete();
-    public abstract string GetProgress();
+    public abstract void RecordEvent();
+
+    public virtual string GetCompletionStatus()
+    {
+        return IsCompleted ? "[X]" : "[ ]";
+    }
 }

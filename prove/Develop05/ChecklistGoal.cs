@@ -1,35 +1,29 @@
-using System;
-
-public class ChecklistGoal : Goal
+class ChecklistGoal : Goal
 {
-    public int TargetCount { get; set; }
-    public int CompletedCount { get; set; }
+    private int completedCount;
+    private int requiredCount;
+    private int bonusPoints;
 
-    public ChecklistGoal(string name, int value, int targetCount) : base(name, value)
+    public ChecklistGoal() : base("Checklist Goal", 50)
     {
-        TargetCount = targetCount;
-        CompletedCount = 0;
+        completedCount = 0;
+        requiredCount = 10;
+        bonusPoints = 500;
     }
 
-    public override void Complete()
+    public override void RecordEvent()
     {
-        CompletedCount++;
-        Console.WriteLine($"You completed an item for the checklist goal: {Name}");
+        completedCount++;
 
-        if (CompletedCount >= TargetCount)
+        if (completedCount == requiredCount)
         {
-            Console.WriteLine($"Congratulations! You have completed the checklist goal: {Name}");
             IsCompleted = true;
-            // Add bonus value to the user's score
-            // TODO: Implement score tracking logic
-        }
-        else
-        {
-            // Add value to the user's score
-            // TODO: Implement score tracking logic
+            Points += bonusPoints;
         }
     }
 
-    public override string GetProgress()
+    public override string GetCompletionStatus()
     {
-        return $"Completed {CompletedCount}/{TargetCount}
+        return IsCompleted ? $"Completed {completedCount}/{requiredCount} times" : base.GetCompletionStatus();
+    }
+}
